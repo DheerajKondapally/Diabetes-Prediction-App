@@ -1,4 +1,5 @@
 # Import necessary libraries
+# Import necessary libraries
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -45,6 +46,9 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random
 scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train)
 X_test = scaler.transform(X_test)
+
+# ✅ Save the scaler for deployment
+joblib.dump(scaler, "scaler.pkl")
 
 # Initialize models
 knn_model = KNeighborsClassifier()
@@ -104,7 +108,8 @@ plot_metric(precision_scores, "Precision")
 plot_metric(recall_scores, "Recall")
 plot_metric(f1_scores, "F1-Score")
 
-# Save models as .pkl
+# ✅ Save models for deployment
 joblib.dump(knn_model, "knn_model.pkl")
 joblib.dump(svm_model, "svm_model.pkl")
-print("✅ Models saved as knn_model.pkl and svm_model.pkl")
+print("✅ Models saved as knn_model.pkl, svm_model.pkl, and scaler.pkl")
+
